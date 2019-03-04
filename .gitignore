@@ -1,0 +1,25 @@
+.project
+salesforce.schema
+.settings
+*.sublime-*
+.DS_Store
+debug/
+Referenced Packages
+.classpath
+.sfdx
+.project
+.salesforce
+node_modules
+.idea
+.tern-project
+selenium-client-jars/
+test/artifacts
+import
+output
+.vscode
+/MDAPI
+*.todo
+*.txt
+*.py
+TwoHeader*
+*.backup*

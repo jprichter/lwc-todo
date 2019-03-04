@@ -1,0 +1,52 @@
+<template>
+    <lightning-card title="TODO">
+        <table>
+            <tr>
+                <td>
+                    <span class="slds-grid slds-grid_align-spread">
+                        <span class="slds-align_absolute-center slds-p-top_medium">
+                            <lightning-input type="checkbox" value={newToDo.IsClosed} name="Status" onchange={handleNewToDoChange}></lightning-input>
+                        </span>
+                    </span>
+                </td>
+                <td>
+                    <lightning-input placeholder="what needs to be done?" value={newToDo.Subject} name="Subject" 
+                        onchange={handleNewToDoChange} onkeyup={handleKeyUp}></lightning-input>
+                </td>
+                <td style="padding-top: 1.25rem;">
+                    <lightning-button-icon class="slds-p-left_small" icon-name="utility:add" alternative-text="Add"
+                        onclick={handleSave}></lightning-button-icon>
+                </td>
+            </tr>
+            <template for:each={todos} for:item='item'>
+                <tr key={item.Id} if:false={item.IsClosed}>
+                    <td>
+                        <span class="slds-grid slds-grid_align-spread">
+                            <span class="slds-align_absolute-center slds-p-top_medium">
+                                <lightning-input onchange={handleChange} value={item.IsClosed} data-item-id={item.Id}
+                                    type="checkbox" name="IsClosed"></lightning-input>
+                            </span>
+                        </span>
+                    </td>
+                    <td>
+                        <lightning-input onblur={handleChange} value={item.Subject} data-item-id={item.Id} name="Subject"></lightning-input>
+                    </td>
+                    <td style="padding-top: 1.25rem;">
+                        <lightning-button-icon class="slds-p-left_small" icon-name="utility:delete" alternative-text="Delete"
+                            data-item-id={item.Id} id={item.Id} onclick={handleDelete}></lightning-button-icon>
+                    </td>
+                </tr>
+                <tr key={item.Id} if:true={item.IsClosed}>
+                    <td></td>
+                    <td>
+                        <lightning-formatted-text class="done" value={item.Subject}></lightning-formatted-text>
+                    </td>
+                    <td style="padding-top: 1.25rem;">
+                        <lightning-button-icon class="slds-p-left_small" icon-name="utility:delete" alternative-text="Delete"
+                            data-item-id={item.Id} id={item.Id} onclick={handleDelete}></lightning-button-icon>
+                    </td>
+                </tr>
+            </template>
+        </table>
+    </lightning-card>
+</template>
